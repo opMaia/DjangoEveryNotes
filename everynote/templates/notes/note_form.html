@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+<!-- 47.5 Use the Crispy Template Tag -->
+{% load crispy_forms_tags %}
+
+<!-- Item 55.4.2 -->
+{% block title %}
+  {{ view.action|default:"Add" }} Note
+{% endblock title %}
+
+{% block content %}
+<!-- Item 55.4.1 -->
+{% with action=view.action|default:"Add" %}
+  <h1>{{ action }} Note</h1>
+  <!-- <form method="post" action="{% url 'notes:add' %}">  Item 55.4.3-->
+  <form method="post" action=".">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary">{{ action }}</button>
+</form>
+{% endwith %}
+{% endblock content %}
+

@@ -1,0 +1,53 @@
+<!-- Exibe detalhes de um queijo qdo selec na tela "Note List" --> 
+<!--
+	• In a DetailView ’s template, the object is accessible as the
+	  lowercased model name. In this case, the object is note .
+	• Before displaying any optional field, we first check if a value
+	  exists.
+	• get_firmness_display shows the note’s firmness attribute
+	  in an attractive format.
+-->
+
+
+{% extends "base.html" %}
+
+{% block title %}Notes: {{ note.name }}{% endblock %}
+
+{% block content %}
+
+<h2>{{ note.name }}</h2>
+
+<!-- Item 55.5: Def um botão para Update -->
+<p>
+  <a class="btn btn-primary"
+    href="{% url 'notes:update' note.slug %}" role="button"> Update</a>
+</p>
+
+<!-- Somente exibe se existir dado -->
+{% if note.firmness %}
+  <p>Firmness: {{ note.get_firmness_display }}</p>
+{% endif %}
+
+<!-- Somente exibe se existir dado -->
+{% if note.description %}
+  <p>{{ note.description }}</p>
+{% endif %}
+
+{% if note.country_of_origin %}
+  <p>Country of Origin: {{ note.country_of_origin.name }}
+    <img src="{{ note.country_of_origin.flag }}" />
+  </p>
+{% endif %}
+
+<!-- display a bunch of info about the creator of the note -->
+<hr/>
+<h3>Submitted (Criado) by
+  <a href="{% url 'users:detail' note.creator.username %}">
+  {{ note.creator.username }}
+  </a>
+</h3>
+{% if note.creator.name %}
+  <p>{{ note.creator.name }}</p>
+{% endif %}
+
+{% endblock content %}

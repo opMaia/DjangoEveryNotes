@@ -1,0 +1,21 @@
+<!-- This template, displays all the notes in a bulleted list. -->
+{% extends "base.html" %}
+
+{% block title %}Note List{% endblock title %}
+
+{% block content %}
+	<h2>Note List</h2>
+<ul>
+	{% for note in note_list %}
+        <!-- The #TODO links will go to the detail pages for each note -->
+		<!-- <li><a href="#TODO">{{ note.name }}</a></li> -->
+		<li><a href="{% url 'notes:detail' note.slug %}">{{ note.name }}</a></li>
+	{% endfor %}
+</ul>
+
+<hr/>
+    <p>Don't see a note listed here?</p>
+    <p><a class="btn btn-primary" href="{% url 'notes:add' %}"
+                                  role="button">Add Note</a></p>
+
+{% endblock content %}
