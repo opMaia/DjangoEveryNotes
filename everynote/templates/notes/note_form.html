@@ -11,13 +11,13 @@
 {% block content %}
 <!-- Item 55.4.1 -->
 {% with action=view.action|default:"Add" %}
-  <h1>{{ action }} Note</h1>
+  <h1>{{ action }} Note <-- note.form.html</h1>
   <!-- <form method="post" action="{% url 'notes:add' %}">  Item 55.4.3-->
   <form method="post" action=".">
     {% csrf_token %}
     {{ form|crispy }}
     <button type="submit" class="btn btn-primary">{{ action }}</button>
-</form>
+  </form>
 {% endwith %}
 {% endblock content %}
 

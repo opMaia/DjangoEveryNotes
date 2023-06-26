@@ -1,21 +1,18 @@
-<!-- Exibe detalhes de um queijo qdo selec na tela "Note List" --> 
+<!-- Exibe detalhes de um queijo qdo selec na tela "Note List" -->
 <!--
 	• In a DetailView ’s template, the object is accessible as the
 	  lowercased model name. In this case, the object is note .
 	• Before displaying any optional field, we first check if a value
 	  exists.
-	• get_firmness_display shows the note’s firmness attribute
+	• get_status_display shows the note’s status attribute
 	  in an attractive format.
 -->
 
-
 {% extends "base.html" %}
-
-{% block title %}Notes: {{ note.name }}{% endblock %}
-
+  {% block title %}Notes: {{ note.name }}{% endblock %}
 {% block content %}
 
-<h2>{{ note.name }}</h2>
+<h2>{{ note.name }} <- note_detail.html</h2>
 
 <!-- Item 55.5: Def um botão para Update -->
 <p>
@@ -24,30 +21,71 @@
 </p>
 
 <!-- Somente exibe se existir dado -->
-{% if note.firmness %}
-  <p>Firmness: {{ note.get_firmness_display }}</p>
+
+{% if note.owner %}
+  <p>Owner: {{ note.owner }}</p>
 {% endif %}
 
-<!-- Somente exibe se existir dado -->
+{% if note.name %}
+  <p>Name: {{ note.name }}</p>
+{% endif %}
+
+{% if note.action %}
+  <p class="text-info">Action: {{ note.action }}</p>
+{% endif %}
+
 {% if note.description %}
-  <p>{{ note.description }}</p>
+  <p>Description: {{ note.description }}</p>
 {% endif %}
 
-{% if note.country_of_origin %}
-  <p>Country of Origin: {{ note.country_of_origin.name }}
-    <img src="{{ note.country_of_origin.flag }}" />
+{% if note.status %}
+  <p>Status: {{ note.get_status_display }}</p>
+{% endif %}
+
+{% if note.comment %}
+  <p>Comment: {{ note.comment }}</p>
+{% endif %}
+
+{% if note.priority %}
+  <p>Priority: {{ note.priority }}</p>
+{% endif %}
+
+{% if note.due_date %}
+  <p>Due Date: {{ note.due_date }}</p>
+{% endif %}
+
+{% if note.date_completed %}
+  <p>Date Completed: {{ note.date_completed }}</p>
+{% endif %}
+
+{% if note.project_id %}
+  <p>Project: {{ note.project_id }}</p>
+{% endif %}
+
+{% if note.persistent %}
+  <p>Persistent: {{ note.persistent }}</p>
+{% endif %}
+
+{% if note.category %}
+  <p>Category: {{ note.category }}</p>
+{% endif %}
+
+{% if note.creator %}
+  <p>Creator: {{ note.creator }}</p>
+{% endif %}
+
+{% if note.country_of_creator %}
+  <p>Country: {{ note.country_of_creator.name }}
+    <img src="{{ note.country_of_creator.flag }}"/>
   </p>
 {% endif %}
 
-<!-- display a bunch of info about the creator of the note -->
 <hr/>
+
+<!-- display a bunch of info about the creator of the note -->
 <h3>Submitted (Criado) by
   <a href="{% url 'users:detail' note.creator.username %}">
   {{ note.creator.username }}
   </a>
 </h3>
-{% if note.creator.name %}
-  <p>{{ note.creator.name }}</p>
-{% endif %}
-
 {% endblock content %}

@@ -43,6 +43,12 @@ urlpatterns = [
 		view=views.NoteCreateView.as_view(),
 		name='add'
 	),
+	# tbview: minha def
+	path(
+		route='tbview/',
+     	view=views.view_em_tabela,
+		name='view_em_tabela'
+	),
     # Item 55.1
     path(
         route='<slug:slug>/update/',
@@ -56,6 +62,8 @@ urlpatterns = [
 		name='detail'
 	),
 ]
+
+
 #opMaia-ini
 print("\t\t\turlpatterns=%s" % (urlpatterns,))
 print("\t\t*** Saindo de /notes/urls.py\n")

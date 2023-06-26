@@ -145,7 +145,7 @@ def test_detail_contains_note_data(rf):
 
     # Let's test our Cheesy details!
     assertContains(response, note.name)
-    assertContains(response, note.get_firmness_display())
+    assertContains(response, note.get_status_display())
     assertContains(response, note.country_of_origin.name)
 
 
@@ -155,7 +155,7 @@ def test_note_create_form_valid(rf, admin_user):
     form_data = {
         "name": "Paski Sir",
         "description": "A salty hard note",
-        "firmness": Note.Firmness.HARD
+        "status": Note.Status.HARD
     }
     request = rf.post(reverse("notes:add"), form_data)
     request.user = admin_user
@@ -166,7 +166,7 @@ def test_note_create_form_valid(rf, admin_user):
 
     # Test that the note matches our form
     assert note.description == "A salty hard note"
-    assert note.firmness == Note.Firmness.HARD
+    assert note.status == Note.Status.HARD
     assert note.creator == admin_user
 
 # Item 56.2
@@ -200,7 +200,7 @@ def test_note_update(rf, admin_user, note):
     form_data = {
         'name': note.name,
         'description': 'Something new',
-        'firmness': note.firmness
+        'status': note.status
     }
     url = reverse("notes:update",
         kwargs={'slug': note.slug})

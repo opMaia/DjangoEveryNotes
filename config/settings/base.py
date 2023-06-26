@@ -59,6 +59,7 @@ DATABASES = {
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 """
 # Alterado: Parametros Django x PostgreSQL ??????????????????????
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -67,6 +68,16 @@ DATABASES = {
         'PASSWORD': 'udjango',
         'HOST': 'localhost',
         'PORT': '5432',
+    }
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'EveryNoteDB',
+        'USER': 'root',
+        'PASSWORD': 'sqlMyPwd',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
@@ -81,6 +92,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # APPS
 # ------------------------------------------------------------------------------
+# DJANGO_APPS: Apps that are part of the core Django code-base.
 DJANGO_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -92,6 +104,8 @@ DJANGO_APPS = [
     "django.contrib.admin",
     "django.forms",
 ]
+# THIRD_PARTY_APPS: Reusable Django apps available from the Python Package
+#                   Index. Third-party means not part of Django core.
 THIRD_PARTY_APPS = [
     "crispy_forms",
     "allauth",
@@ -99,7 +113,8 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     "django_countries", # CountryField
 ]
-
+# LOCAL_APPS: Django apps that are internal to our Django project, such as
+#             the users app.
 LOCAL_APPS = [
     "everynote.users.apps.UsersConfig",
     # Your stuff: custom apps go here
